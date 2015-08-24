@@ -17,9 +17,9 @@ object Set {
   // Checks if provided element is a member of the set
   def isMember[A, T](start: A, set: Set[A])(implicit ord: Ordering[A]): Boolean = set match {
     case Nil => false
-    case SetTree(l, e, r) if ord.equiv(start, e) => true
     case SetTree(l, e, _) if ord.lt(start, e) => isMember(start, l)
     case SetTree(_, e, r) if ord.gt(start, e) => isMember(start, r)
+    case SetTree(_, _, _) => true // since start == e at this point
   }
 
   // Inserts element into set
