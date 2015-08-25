@@ -16,6 +16,16 @@ object LeftistHeap {
   // Insert element into leftist heap
   def insert[A](elem: A, h: LeftistHeap[A])(implicit ord: Ordering[A]): LeftistHeap[A] = merge(h, LeftistTree(1, elem, Nil, Nil))
 
+  def findMin[A](h: LeftistHeap[A]): Option[A] = h match {
+    case Nil => None
+    case LeftistTree(_, e, _, _) => Some(e)
+  }
+
+  def deleteMin[A](h: LeftistHeap[A]): LeftistHeap[A] = h match {
+    case Nil => Nil
+    case LeftistTree(_, _, l, r) => merge(l, r)
+  }
+
   // Merges two leftist heaps
   def merge[A](a: LeftistHeap[A], b: LeftistHeap[A])(implicit ord: Ordering[A]): LeftistHeap[A] = {
     // Rank of heap
