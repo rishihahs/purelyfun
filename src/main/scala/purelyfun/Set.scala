@@ -3,14 +3,13 @@ package purelyfun
 /**
  * Implementation of sets from Chapter 2.2
  */
-
-sealed trait Set[+A]
-
-case object Nil extends Set[Nothing]
-
-case class SetTree[A](left: Set[A], elem: A, right: Set[A]) extends Set[A]
-
 object Set {
+
+  sealed trait Set[+A]
+
+  case object Nil extends Set[Nothing]
+
+  case class SetTree[A](left: Set[A], elem: A, right: Set[A]) extends Set[A]
 
   def apply[A](elems: A*)(implicit ord: Ordering[A]): Set[A] = elems.foldLeft(Nil: Set[A])((set, e) => insert(e, set))
 
